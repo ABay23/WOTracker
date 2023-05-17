@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../components/features/auth/authSlice'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,12 @@ const Login = () => {
   })
 
   const { name, email, password, password2 } = formData
+
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -20,13 +28,11 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    // if (!name || !email || !password || !password2) {
-    //   toast.error('Please complete all the fields')
-    // }
-
-    if (password !== password2) {
-      toast.error('Passwords do not match')
+    const userData = {
+      email,
+      password,
     }
+    dispatch(login(userData))
   }
 
   return (
