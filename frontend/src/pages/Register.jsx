@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
-import { register } from '../components/features/auth/authSlice'
+import { register, reset } from '../components/features/auth/authSlice'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -21,17 +21,6 @@ const Register = () => {
     (state) => state.auth
   )
 
-  if (password !== password2) {
-    toast.error('Passwords do not match')
-  } else {
-    const userData = {
-      name,
-      email,
-      password,
-    }
-    dispatch(register(userData))
-  }
-
   useEffect(() => {
     if (isError) {
       toast.error(message)
@@ -40,6 +29,7 @@ const Register = () => {
     if (isSuccess || user) {
       navigate('/')
     }
+    dispatch(reset())
   }, [isError, isSuccess, user, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -52,9 +42,16 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    // if (!name || !email || !password || !password2) {
-    //   toast.error('Please complete all the fields')
-    // }
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      }
+      dispatch(register(userData))
+    }
   }
 
   return (
