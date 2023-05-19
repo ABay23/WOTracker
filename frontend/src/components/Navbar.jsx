@@ -1,6 +1,19 @@
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { logout, reset } from './features/auth/authSlice'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { user } = useSelector((state) => state.auth)
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (
     <div className=' w-screen'>
       <header aria-label='Site Header' className='bg-white dark:bg-gray-900'>
@@ -82,42 +95,35 @@ const Navbar = () => {
                 </ul>
               </nav>
             </div>
-
             <div className='flex items-center gap-4'>
-              <div className='sm:flex sm:gap-4'>
-                <Link to={'/login'}>
-                  <button className='rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500'>
-                    Login
-                  </button>
-                </Link>
-
-                <div className='hidden sm:flex'>
-                  <Link to={'/register'}>
-                    <button className='rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75'>
-                      Register
+              {user ? (
+                <div className='sm:flex sm:gap-4'>
+                  <Link to={'/login'}>
+                    <button
+                      onClick={onLogout}
+                      className='rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500'
+                    >
+                      Logout
                     </button>
                   </Link>
                 </div>
-              </div>
+              ) : (
+                <div className='sm:flex sm:gap-4'>
+                  <Link to={'/login'}>
+                    <button className='rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500'>
+                      Login
+                    </button>
+                  </Link>
 
-              <div className='block md:hidden'>
-                <button className='rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M4 6h16M4 12h16M4 18h16'
-                    />
-                  </svg>
-                </button>
-              </div>
+                  <div className='hidden sm:flex'>
+                    <Link to={'/register'}>
+                      <button className='rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75'>
+                        Register
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
