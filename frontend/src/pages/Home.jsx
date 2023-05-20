@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -24,9 +25,11 @@ const Home = () => {
             Woah, successfully completed 3/5 Tasks
           </p>
           <div className='space-x-4 bg-gray-100 py-4 text-center'>
-            <button className='inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'>
-              Cancel
-            </button>
+            <Link to={'/new-ticket'}>
+              <button className='inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'>
+                New Ticket
+              </button>
+            </Link>
           </div>
         </div>
         <div className='w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl'>
