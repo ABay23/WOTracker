@@ -1,8 +1,30 @@
-import React from 'react'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 function NewTicket() {
-  const { name, price, category, quantity, description } = []
+  const { user } = useSelector((state) => state.auth)
 
+  const [name] = useState(user.name)
+  const [email] = useState(user.email)
+  const [product, setProduct] = useState('iPhone')
+  const [description, setDescription] = useState('')
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    // dispatch(createTicket({ product, description }))
+    //   .unwrap()
+    //   .then(() => {
+    //     // We got a good response so navigate the user
+    //     navigate('/tickets')
+    //     toast.success('New ticket created!')
+    //   })
+    //   .catch(toast.error)
+  }
   const saveProduct = () => {}
   const handleImputChange = () => {}
 
@@ -64,7 +86,6 @@ function NewTicket() {
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                   placeholder='$200.00'
                   required=''
-                  value={price}
                   onChange={handleImputChange}
                 />
               </div>
@@ -78,7 +99,7 @@ function NewTicket() {
                 <select
                   // onChange={handleImputChange}
                   id='category'
-                  value={category}
+                  value={product}
                   onChange={(e) => e.target.value}
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                 >
@@ -103,7 +124,7 @@ function NewTicket() {
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                   placeholder='12'
                   required=''
-                  value={quantity}
+                  // value={quantity}
                   onChange={handleImputChange}
                 />
               </div>
@@ -122,7 +143,7 @@ function NewTicket() {
                   className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                   placeholder='Your description here'
                   value={description}
-                  onChange={(e) => e.target.value}
+                  onChange={(e) => setDescription(e.target.value)}
                   required=''
                 ></textarea>
               </div>
