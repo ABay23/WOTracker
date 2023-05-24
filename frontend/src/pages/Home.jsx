@@ -35,7 +35,7 @@ const Home = () => {
             Check the Status of your Work Orders
           </p>
           <div className='space-x-4 bg-gray-100 py-4 text-center'>
-            <Link to={'/new-ticket'}>
+            <Link to={'/tickets'}>
               <button className='inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'>
                 New Ticket
               </button>

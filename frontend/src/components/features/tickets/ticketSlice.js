@@ -33,7 +33,7 @@ export const createTicket = createAsyncThunk(
 
 //* Get User Tickets
 export const getTickets = createAsyncThunk(
-  'ticket/getAll',
+  'tickets/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
