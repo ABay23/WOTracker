@@ -3,15 +3,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import ticketService from './ticketService'
 
 const initialState = {
-  tickets: [],
-  ticket: {},
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: '',
+  tickets: null,
+  ticket: null,
 }
 
-//* Register User
+//* Create Ticket
 export const createTicket = createAsyncThunk(
   'ticket/create',
   async (ticketData, thunkAPI) => {

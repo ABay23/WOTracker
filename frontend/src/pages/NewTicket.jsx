@@ -7,29 +7,14 @@ import Spinner from '../components/Spinner'
 
 function NewTicket() {
   const { user } = useSelector((state) => state.auth)
-  const { isLoading, isSuccess, isError, message } = useSelector(
-    (state) => state.ticket
-  )
 
   const [name] = useState(user.name)
   const [email] = useState(user.email)
-  const [product, setProduct] = useState('iPhone')
+  const [product, setProduct] = useState('')
   const [description, setDescription] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message)
-    }
-
-    if (isSuccess) {
-      dispatch(reset())
-      navigate('/tickets')
-    }
-    dispatch(reset())
-  }, [dispatch, isError, isSuccess, message, navigate])
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -41,10 +26,6 @@ function NewTicket() {
         toast.success('New ticket created!')
       })
       .catch(toast.error)
-  }
-
-  if (isLoading) {
-    return <Spinner />
   }
 
   return (
@@ -135,7 +116,7 @@ function NewTicket() {
                   // onChange={handleImputChange}
                   id='category'
                   value={product}
-                  onChange={(e) => e.target.value}
+                  onChange={(e) => setProduct(e.target.value)}
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                 >
                   <option defaultValue=''>Select category</option>
@@ -158,7 +139,7 @@ function NewTicket() {
                   id='quantity'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                   placeholder='12'
-                  required=''
+                  // required=''
                   // value={quantity}
                   // onChange={handleImputChange}
                 />
@@ -179,7 +160,7 @@ function NewTicket() {
                   placeholder='Your description here'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  required=''
+                  required
                 ></textarea>
               </div>
             </div>
