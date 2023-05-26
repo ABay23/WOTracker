@@ -30,7 +30,7 @@ function NewTicket() {
 
   return (
     <div className=' w-screen h-screen'>
-      <section className=' bg-gradient-to-br from-gray-800 to-teal-900'>
+      <section className=' bg-gradient-to-br from-gray-600 to-teal-900'>
         <div className=' py-8 px-4 mx-auto max-w-2xl lg:py-16'>
           <h2 className='mb-4 text-xl font-bold text-gray-900 dark:text-white'>
             Create New ticket

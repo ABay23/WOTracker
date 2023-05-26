@@ -13,9 +13,13 @@ const TicketItem = ({ ticket }) => {
       <div className={`basis-1/2 font-bold text-center pt-2 ${ticket.status}`}>
         {ticket.status}
       </div>
-      <button className='basis-1/2 mx-2 rounded-md bg-teal-500 text-white font-bold py-2  border-blue-100'>
-        <Link to={`/ticket/${ticket.id}`}>Details</Link>
-      </button>
+      <div className='basis-1/2 py-2 text-center'>
+        <Link to={`/ticket/${ticket._id}`}>
+          <button className=' w-40 py-1 rounded-md bg-teal-500 text-white font-bold  border-blue-100'>
+            Details
+          </button>
+        </Link>
+      </div>
     </div>
   )
 }
