@@ -25,10 +25,14 @@ const Tickets = () => {
       </h1>
       <div className=' px-10'>
         <div className=' flex flex-row divide-x bg-slate-400 rounded-l-lg rounded-r-lg py-4'>
-          <div className=' basis-1/2 font-extrabold text-center'>Date</div>
-          <div className=' basis-1/2 font-extrabold text-center'>Product</div>
-          <div className=' basis-1/2 font-extrabold text-center'>Status</div>
-          <div className=' basis-1/2 font-extrabold text-center'>Detail</div>
+          <div className=' basis-3/3 font-extrabold text-center'>Date</div>
+          <div className=' basis-3/3 font-extrabold text-center'>Product</div>
+          <div className=' basis-1.5/1.5 font-extrabold text-center'>
+            Status
+          </div>
+          <div className=' basis-2.5/2.5 font-extrabold text-center'>
+            Detail
+          </div>
         </div>
         <div className='flex  flex-col space-y-2 pt-5'>
           {tickets.map((ticket) => (
