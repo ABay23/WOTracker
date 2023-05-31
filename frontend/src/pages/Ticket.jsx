@@ -41,6 +41,14 @@ const Ticket = () => {
           <p>{ticket.description}</p>
         </div>
       </header>
+      {ticket.status !== 'closed' && (
+        <button
+          className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
+          onClick={() => navigate(`/edit/${ticket._id}`)}
+        >
+          Edit Ticket
+        </button>
+      )}
     </div>
   )
 }
