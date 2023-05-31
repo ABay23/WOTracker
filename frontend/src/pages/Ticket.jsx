@@ -2,7 +2,10 @@ import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTicket } from '../components/features/tickets/ticketSlice'
+import {
+  closeTicket,
+  getTicket,
+} from '../components/features/tickets/ticketSlice'
 import Status from '../components/Status'
 
 const Ticket = () => {
@@ -18,6 +21,15 @@ const Ticket = () => {
     // .unwrap().catch(toast.error)
     // dispatch(getNotes(ticketId)).unwrap().catch(toast.error)
   }, [ticketId, dispatch])
+
+  const onTicketClose = () => {
+    dispatch(closeTicket(ticketId))
+      .unwrap()
+      .then(() => {
+        navigate('/tickets')
+        toast.success('Ticket closed!')
+      })
+  }
 
   return (
     <div className='w-screen h-screen bg-gray-500'>
@@ -44,7 +56,7 @@ const Ticket = () => {
       {ticket.status !== 'closed' && (
         <button
           className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
-          onClick={() => navigate(`/edit/${ticket._id}`)}
+          onClick={onTicketClose}
         >
           Edit Ticket
         </button>

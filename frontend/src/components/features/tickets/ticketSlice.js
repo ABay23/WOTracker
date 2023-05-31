@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import ticketService from './ticketService'
 
 const initialState = {
-  tickets: null,
+  tickets: [],
   ticket: {},
 }
 
@@ -137,6 +137,8 @@ export const ticketSlice = createSlice({
       })
       .addCase(closeTicket.fulfilled, (state, action) => {
         state.isLoading = false
+        // state.isSuccess = true
+        state.ticket = action.payload
         state.ticket.map((ticket) =>
           ticket._id === action.payload._id
             ? (ticket.status = 'closed')
