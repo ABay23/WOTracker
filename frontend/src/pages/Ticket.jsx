@@ -33,34 +33,35 @@ const Ticket = () => {
 
   return (
     <div className='w-screen h-screen bg-gray-500'>
-      <header>
-        <h1> Ticket</h1>
-        <h2>
-          {ticket._id}
-          <span>
-            <Status ticket={ticket} />
-            {ticket.status}
-          </span>
-        </h2>
-        <h3>
-          {' '}
-          Ticket Created at:{' '}
-          {new Date(ticket.createdAt).toLocaleString('en-US')}
-        </h3>
-        <hr />
-        <div>
-          <h3>Description</h3>
-          <p>{ticket.description}</p>
-        </div>
-      </header>
-      {ticket.status !== 'closed' && (
-        <button
-          className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
-          onClick={onTicketClose}
-        >
-          Edit Ticket
-        </button>
-      )}
+      <div className=' block p-40 bg-slate-400 mx-36'>
+        <header>
+          <h1 className=' text-xl font-bold '> Ticket</h1>
+          <h2 className=' font-bold '>
+            {ticket._id}
+            <span className=''>
+              <Status className=' container w-2' ticket={ticket} />
+            </span>
+          </h2>
+          <h3>
+            {' '}
+            Ticket Created at:{' '}
+            {new Date(ticket.createdAt).toLocaleString('en-US')}
+          </h3>
+          <hr />
+          <div>
+            <h3>Description</h3>
+            <p>{ticket.description}</p>
+          </div>
+        </header>
+        {ticket.status !== 'closed' && (
+          <button
+            className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
+            onClick={onTicketClose}
+          >
+            Edit Ticket
+          </button>
+        )}
+      </div>
     </div>
   )
 }
