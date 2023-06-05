@@ -35,12 +35,14 @@ const Ticket = () => {
     <div className='w-screen h-screen bg-gray-500'>
       <div className=' block p-40 bg-slate-400 mx-36'>
         <header>
-          <h1 className=' text-xl font-bold '> Ticket</h1>
-          <h2 className=' font-bold '>
+          <h1 className=' text-xl font-bold py-6'> Ticket</h1>
+          <h2 className=' font-bold pb-4 '>
             {ticket._id}
-            <span className=''>
-              <Status className=' container w-2' ticket={ticket} />
-            </span>
+            <div className=' w-24 h-6 py-4'>
+              <span className=' text-center'>
+                <Status ticket={ticket} />
+              </span>
+            </div>
           </h2>
           <h3>
             {' '}

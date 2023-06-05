@@ -5,11 +5,11 @@ const Status = ({ ticket }) => {
     if (ticket.status === 'new') {
       return ' bg-green-300 text-green-800 text-sm font-medium mr-2 px-2 py-0.5 rounded-full text-center'
     } else if (ticket.status === 'In Progress') {
-      return 'bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full'
-    } else if (ticket.status === 'Closed') {
-      return 'bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full'
+      return 'bg-amber-500 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full text-center'
+    } else if (ticket.status === 'closed') {
+      return 'bg-red-500 text-amber-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full text-center'
     } else {
-      return 'bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full'
+      return 'bg-green-300 text-green-800 text-sm font-medium mr-2 px-2 py-0.5 rounded-full text-center'
     }
   }
 

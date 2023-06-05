@@ -12,7 +12,9 @@ const TicketItem = ({ ticket }) => {
         {ticket.product}
       </div>
       <div className='basis-1.5/1.5 pt-3'>
-        <Status ticket={ticket} />
+        <div className=' w-24 ml-12'>
+          <Status ticket={ticket} />
+        </div>
       </div>
       <div className='basis-2.5/2.5 py-2 text-center'>
         <Link to={`/ticket/${ticket._id}`}>
