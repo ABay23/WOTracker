@@ -25,8 +25,9 @@ const addNote = asyncHandler(async (req, res) => {
     text,
     isStaff: false,
     ticket: req.params.ticketId,
-    user,
+    user: user,
   })
+  res.status(201).json(note)
 })
 
 module.exports = { getNotes, addNote }

@@ -6,7 +6,10 @@ import {
   closeTicket,
   getTicket,
 } from '../components/features/tickets/ticketSlice'
+import { getNotes } from '../components/features/notes/noteSlice'
 import Status from '../components/Status'
+import NoteItem from '../components/NoteItem'
+import Spinner from '../components/Spinner'
 
 const Ticket = () => {
   const navigate = useNavigate()
@@ -16,10 +19,11 @@ const Ticket = () => {
   const { ticket } = useSelector((state) => state.tickets)
   // console.log(ticket)
 
+  const { notes } = useSelector((state) => state.notes)
+
   useEffect(() => {
-    dispatch(getTicket(ticketId))
-    // .unwrap().catch(toast.error)
-    // dispatch(getNotes(ticketId)).unwrap().catch(toast.error)
+    dispatch(getTicket(ticketId)).unwrap().catch(toast.error)
+    dispatch(getNotes(ticketId)).unwrap().catch(toast.error)
   }, [ticketId, dispatch])
 
   const onTicketClose = () => {
@@ -54,7 +58,13 @@ const Ticket = () => {
             <h3>Description</h3>
             <p>{ticket.description}</p>
           </div>
+          <h2>Notes</h2>
         </header>
+        {notes ? (
+          notes.map((note) => <NoteItem key={note._id} note={note} />)
+        ) : (
+          <Spinner />
+        )}
         {ticket.status !== 'closed' && (
           <button
             className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
