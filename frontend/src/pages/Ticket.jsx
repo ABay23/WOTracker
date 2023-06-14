@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,11 +10,16 @@ import { getNotes } from '../components/features/notes/noteSlice'
 import Status from '../components/Status'
 import NoteItem from '../components/NoteItem'
 import Spinner from '../components/Spinner'
+import { FaPlus } from 'react-icons/fa'
+import { set } from 'mongoose'
+import Modal from 'react-modal'
 
 const Ticket = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { ticketId } = useParams()
+
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const { ticket } = useSelector((state) => state.tickets)
   // console.log(ticket)
@@ -34,6 +39,10 @@ const Ticket = () => {
         toast.success('Ticket closed!')
       })
   }
+
+  // Open / Close Modal
+  const openModal = () => setModalIsOpen(true)
+  const closeModal = () => setModalIsOpen(false)
 
   return (
     <div className='w-screen h-screen bg-gray-500'>
@@ -60,6 +69,18 @@ const Ticket = () => {
           </div>
           <h2>Notes</h2>
         </header>
+        {ticket.status !== 'closed' && (
+          <button className=' inline-block' onClick={openModal}>
+            <FaPlus /> Add Note
+          </button>
+        )}
+        <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+          <div className=' flex flex-col'>
+            <h1 className=' text-xl font-bold py-6'>Add Note</h1>
+            <button onClick={closeModal}>X</button>
+          </div>
+        </Modal>
+
         {notes ? (
           notes.map((note) => <NoteItem key={note._id} note={note} />)
         ) : (
