@@ -4,7 +4,7 @@ const colors = require('colors')
 const dotenv = require('dotenv').config()
 const connectDB = require('./config/db')
 
-const PORT = process.env.BACKEND_PORT
+const PORT = process.env.BACKEND_PORT || 5000
 
 //* Connect DB
 connectDB()
