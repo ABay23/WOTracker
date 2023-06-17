@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { createTicket, reset } from '../components/features/tickets/ticketSlice'
-import Spinner from '../components/Spinner'
+import { createTicket } from '../components/features/tickets/ticketSlice'
+// import Spinner from '../components/Spinner'
 
 function NewTicket() {
   const { user } = useSelector((state) => state.auth)
 
   const [name] = useState(user.name)
   const [email] = useState(user.email)
-  const [product, setProduct] = useState('')
+  const [category, setCategory] = useState('Select category')
+  const [department, setDepartment] = useState('')
+  const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
   const dispatch = useDispatch()
@@ -18,7 +20,7 @@ function NewTicket() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(createTicket({ product, description }))
+    dispatch(createTicket({ category, department, title, description }))
       .unwrap()
       .then(() => {
         // We got a good response so navigate the user
@@ -50,7 +52,7 @@ function NewTicket() {
                   id='name'
                   value={name}
                   className='bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                  placeholder='Type product name'
+                  // placeholder='Type product name'
                   required=''
                 />
               </div>
@@ -67,7 +69,7 @@ function NewTicket() {
                   id='email'
                   value={email}
                   className='bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                  placeholder='Type product name'
+                  // placeholder='Type product name'
                   required=''
                 />
               </div>
@@ -77,18 +79,20 @@ function NewTicket() {
                   className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                 >
                   {/* [Working on adding Vendo Code to the DB]  */}
-                  Vendor Item Code
+                  Department
                 </label>
                 <input
                   type='text'
                   name='vcode'
                   id='vcode'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                  placeholder='Vendor Code'
-                  // required=''
+                  placeholder='Request Department'
+                  onChange={(e) => setDepartment(e.target.value)}
+                  value={department}
+                  required=''
                 />
               </div>
-              <div className='w-full'>
+              {/* <div className='w-full'>
                 <label
                   htmlFor='price'
                   className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
@@ -104,7 +108,7 @@ function NewTicket() {
                   required=''
                   // onChange={handleImputChange}
                 />
-              </div>
+              </div> */}
               <div>
                 <label
                   htmlFor='category'
@@ -115,33 +119,38 @@ function NewTicket() {
                 <select
                   // onChange={handleImputChange}
                   id='category'
-                  value={product}
-                  onChange={(e) => setProduct(e.target.value)}
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
                 >
                   <option defaultValue=''>Select category</option>
-                  <option value='iPhone'>iPhone</option>
-                  <option value='iMac'>iMac</option>
-                  <option value='iPad'>iPad</option>
-                  <option value='MacBookPro'>MacBookPro</option>
+                  <option value='Repairs'>Repairs</option>
+                  <option value='Maitenance'>Maitenance</option>
+                  <option value='Assets'>Assets</option>
+                  <option value='Helpdesk'>Helpdesk</option>
+                  <option value='Network'>Network</option>
+                  <option value='Power Supply'>Power Supply</option>
+                  <option value='Animal Support'>Animal Support</option>
+                  <option value='Other'>Other</option>
                 </select>
               </div>
               <div>
                 <label
-                  htmlFor='item-weight'
+                  htmlFor='requirement'
                   className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                 >
-                  Inventory Count
+                  Requirement Title
                 </label>
                 <input
-                  type='number'
-                  name='quantity'
-                  id='quantity'
+                  type='text'
+                  name='requirement'
+                  id='requirement'
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                  placeholder='12'
-                  // required=''
+                  placeholder='Title of your requirement'
+                  required
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
                   // value={quantity}
-                  // onChange={handleImputChange}
                 />
               </div>
               <div className='sm:col-span-2'>
@@ -166,10 +175,10 @@ function NewTicket() {
             </div>
             <button
               type='submit'
-              className='w-50  text-white bg-gray-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+              className='w-50  text-white bg-violet-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               // className='inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800'
             >
-              Add Product
+              Create Ticket
             </button>
           </form>
         </div>

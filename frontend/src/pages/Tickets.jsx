@@ -26,7 +26,9 @@ const Tickets = () => {
       <div className=' px-10'>
         <div className=' flex flex-row divide-x bg-slate-400 rounded-l-lg rounded-r-lg py-4'>
           <div className=' basis-3/3 font-extrabold text-center'>Date</div>
-          <div className=' basis-3/3 font-extrabold text-center'>Product</div>
+          <div className=' basis-3/3 font-extrabold text-center'>
+            Work Order
+          </div>
           <div className=' basis-1.5/1.5 font-extrabold text-center'>
             Status
           </div>

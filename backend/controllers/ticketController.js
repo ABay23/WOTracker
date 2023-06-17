@@ -37,16 +37,18 @@ const getTicket = asyncHandler(async (req, res) => {
 // @route   POST /api/tickets
 // @access  Private
 const createTicket = asyncHandler(async (req, res) => {
-  const { product, description } = req.body
+  const { category, description, department, title } = req.body
 
-  if (!product || !description) {
+  if (!category || !description) {
     res.status(400)
     throw new Error('Please add a product and description')
   }
 
   const ticket = await Ticket.create({
-    product,
+    category,
+    department,
     description,
+    title,
     user: req.user.id,
     status: 'new',
   })

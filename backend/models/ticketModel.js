@@ -7,10 +7,29 @@ const ticketSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    product: {
+    department: {
+      type: String,
+      required: [true, 'Please enter the requesting department'],
+    },
+    category: {
       type: String,
       required: [true, 'Please select a product'],
-      enum: ['iPhone', 'Macbook Pro', 'iMac', 'iPad'],
+      enum: [
+        'Repairs',
+        'Maintenance',
+        'Assets',
+        'Helpdesk',
+        'Helpdesk',
+        'Network',
+        'Power Supply',
+        'Animal Support',
+        'Other',
+      ],
+    },
+
+    title: {
+      type: String,
+      required: [true, 'Please enter the requesting department'],
     },
     description: {
       type: String,

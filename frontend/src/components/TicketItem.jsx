@@ -8,9 +8,7 @@ const TicketItem = ({ ticket }) => {
       <div className='basis-3/3 font-bold text-center align-baseline pt-2'>
         {new Date(ticket.createdAt).toLocaleString('eng-US')}
       </div>
-      <div className='basis-3/3 font-bold text-center pt-2'>
-        {ticket.product}
-      </div>
+      <div className='basis-3/3 font-bold text-center pt-2'>{ticket.title}</div>
       <div className='basis-1.5/1.5 pt-3'>
         <div className=' w-24 ml-12'>
           <Status ticket={ticket} />
