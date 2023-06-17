@@ -10,7 +10,7 @@ import { createNote, getNotes } from '../components/features/notes/noteSlice'
 import Status from '../components/Status'
 import NoteItem from '../components/NoteItem'
 import Spinner from '../components/Spinner'
-import { FaPlus } from 'react-icons/fa'
+import { FaArrowAltCircleLeft, FaPlus } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 const Ticket = () => {
@@ -56,9 +56,16 @@ const Ticket = () => {
       })
   }
   return (
-    <div className='w-screen h-screen bg-gray-500'>
-      <div className=' block p-40 bg-slate-400 mx-36'>
+    <div className='w-screen h-screen py-10 bg-gradient-to-br from-gray-600 to-teal-900'>
+      <div className='relative block px-40 bg-slate-400 mx-36 py-8 rounded-lg'>
         <header>
+          <button
+            className='absolute top-4 right-4 flex flex-row align-middle '
+            onClick={() => navigate('/tickets')}
+          >
+            <FaArrowAltCircleLeft className='mr-2' size={20} />
+            <div className='text-md'>Back</div>
+          </button>
           <h1 className=' text-xl font-bold py-6'> Ticket</h1>
           <h2 className=' font-bold pb-4 '>
             {ticket._id}
@@ -68,32 +75,47 @@ const Ticket = () => {
               </span>
             </div>
           </h2>
-          <h3>
+          <h3 className='font-bold'>
             {' '}
             Ticket Created at:{' '}
             {new Date(ticket.createdAt).toLocaleString('en-US')}
           </h3>
           <hr />
-          <div>
-            <h3>Description</h3>
-            <p>{ticket.description}</p>
+          <div className='py-4'>
+            <h3 className='font-bold text-lg'>Description</h3>
+            <div className=' italic font-semibold text-md'>
+              <p>{ticket.description}</p>
+            </div>
           </div>
+
           <h2>Notes</h2>
         </header>
         {ticket.status !== 'closed' && (
-          <button className=' inline-block' onClick={openModal}>
-            <FaPlus /> Add Note
+          <button
+            className='flex flex-row justify-evenly hover:text-teal-400'
+            onClick={openModal}
+          >
+            <FaPlus
+              className='m-2 text-teal-800 border-slate-600 rounded-full bg-slate-300'
+              size={12}
+            />{' '}
+            Add Note
           </button>
         )}
         <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-          <div className=' flex flex-col'>
+          <div className=' flex flex-col relative'>
             <h1 className=' text-xl font-bold py-6'>Add Note</h1>
-            <button onClick={closeModal}>X</button>
+            <button
+              className=' absolute top-2 right-2 text-2xl text-teal-700'
+              onClick={closeModal}
+            >
+              X
+            </button>
             <form onSubmit={onNoteSubmit}>
               <div className=' flex flex-col'>
                 <label htmlFor='text'>Note</label>
                 <textarea
-                  className=' border-2 border-gray-500 rounded-md'
+                  className=' border-2 border-gray-500 rounded-md p-2 font-sans'
                   name='text'
                   id='text'
                   value={noteText}
@@ -101,7 +123,7 @@ const Ticket = () => {
                 ></textarea>
                 <div>
                   <button
-                    className=' inline-block rounded-md bg-purple-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
+                    className=' inline-block rounded-md bg-purple-500 px-10 py-2 mt-4 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400'
                     type='submit'
                   >
                     Submit

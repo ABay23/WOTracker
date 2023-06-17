@@ -4,7 +4,7 @@ const NoteItem = ({ note }) => {
   const { user } = useSelector((state) => state.auth)
   return (
     <div
-      className='flex flex-col align-middle bg-slate-200 rounded-l-lg rounded-r-lg py-3'
+      className='flex flex-col align-middle bg-slate-200 rounded-l-lg rounded-r-lg py-3 pl-3 my-4'
       style={{ backgroundColor: note.isStaff ? '#FEEBC8' : '#CFFFE5' }}
     >
       <h4>
@@ -13,7 +13,9 @@ const NoteItem = ({ note }) => {
       </h4>
       <br />
       <p>{note.text}</p>
-      <div>{new Date(note.createdAt).toLocaleString('en-US')}</div>
+      <div className=' font-mono text-xs pt-2'>
+        {new Date(note.createdAt).toLocaleString('en-US')}
+      </div>
     </div>
   )
 }
